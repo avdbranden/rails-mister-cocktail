@@ -13,11 +13,19 @@
         </ul>
       <% end %>
 
+      <ul>
+        <% if @dose.errors.any? %>
+          <% @dose.errors.full_messages.each do |message| %>
+            <li class="text-left"><%= message %> </li>
+          <% end %>
+        <% end %>
+      </ul>
+
 
       <%= simple_form_for [@cocktail, @dose] do |f| %>
-        <%= f.input :ingredient, collection: @ingredients %>
-        <%= f.input :description %>
-        <%= f.submit%>
+        <%= f.input :ingredient_id, collection: Ingredient.all, prompt: "Choose an ingredient" %>
+        <%= f.input :description, placeholder: "3cl, 2 grammes, etc." %>
+        <%= f.button :submit, class: "btn btn-primary" %>
       <% end %>
 
 

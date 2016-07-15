@@ -5,10 +5,6 @@ before_action :set_cocktail, only: [:show]
     @cocktails = Cocktail.all
   end
   def show
-    @ingredients = []
-    Ingredient.all.each do |ingredient|
-      @ingredients << ingredient.name
-    end
     @dose = Dose.new
   end
   def new
