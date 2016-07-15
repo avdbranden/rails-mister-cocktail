@@ -13,7 +13,10 @@ gem 'simple_form'
 gem 'autoprefixer-rails'
 
 # Faker
-gem 'faker'
+gem 'faker' # Put out of development to enable db:seed on heroku
+
+# Figaro
+gem 'figaro'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
