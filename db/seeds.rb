@@ -1,17 +1,19 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+require 'nokogiri'
+require 'open-uri'
+require 'faker'
 
+url     = "http://www.1001cocktails.com/cocktails/recettes-popularite-0.html"
+doc     = Nokogiri::HTML(open(url), nil, 'utf-8')
+results =  doc.css('#content a[style="font-weight:bold"]')
 Cocktail.destroy_all
-10.times do
-  cocktail = Cocktail.new({
-    name: Faker::Company.buzzword
-    })
-  cocktail.save
+results.each do |cocktail_name|
+  results.count.times do
+    cocktail = Cocktail.new({
+      name: cocktail_name.text,
+      picture: "mojito.jpg"
+      })
+    cocktail.save
+  end
 end
 
 Ingredient.destroy_all
